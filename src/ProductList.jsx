@@ -92,7 +92,7 @@ function ProductList({ onHomeClick }) {
             category: "Insect Repellent Plants",
             plants: [
                 {
-                    name: "oregano",
+                    name: "Oregano",
                     image: "https://cdn.pixabay.com/photo/2015/05/30/21/20/oregano-790702_1280.jpg",
                     description: "The oregano plants contains compounds that can deter certain insects.",
                     cost: "$10"
@@ -274,8 +274,27 @@ function ProductList({ onHomeClick }) {
             </div>
             {!showCart ? (
                 <div className="product-grid">
-
-
+                    {plantsArray.map((category, index) => (
+                        <div className="product-list" id={`product-list-${index}`}>
+                            <div>{category.category}</div>
+                            {category.plants.map((plant, pIndex) => (
+                                <div className="plant-card" id={`plant-card-${index}-${pIndex}`}>
+                                    <div className="product-title">
+                                        {plant.name}
+                                    </div>
+                                    <div className="product-image">
+                                        <img src={plant.image} />
+                                    </div>
+                                    <div className="product-price">
+                                        {plant.price}
+                                    </div>
+                                    <button className="product-button">
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            ))};
+                        </div>
+                    ))}
                 </div>
             ) : (
                 <CartItem onContinueShopping={handleContinueShopping} />
