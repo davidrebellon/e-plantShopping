@@ -8,6 +8,7 @@ function ProductList({ onHomeClick }) {
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
     const [addedToCart, setAddedToCart] = useState({}); // control which plants have been added
+    const dispatch = useDispatch();
 
     const plantsArray = [ // provided by IBM 
         {
@@ -258,7 +259,8 @@ function ProductList({ onHomeClick }) {
     };
 
     const handleAddToCart = (plant) => {
-        useDispatch(addItem(plant))
+        console.log(`Adding ${plant.name} to cart`)
+        dispatch(addItem(plant))
         setAddedToCart((prevState) => (
             {
                 ...prevState,
@@ -309,10 +311,10 @@ function ProductList({ onHomeClick }) {
                                             {plant.cost}
                                         </div>
                                         <button
-                                            className="product-button"
+                                            className={`product-button ${addedToCart[plant.name] && 'added-to-cart'}`}
                                             onClick={() => handleAddToCart(plant)}
                                         >
-                                            Add to Cart
+                                            {addedToCart[plant.name] ? 'Added to Cart' : 'Add to Cart'}
                                         </button>
                                     </div>
                                 ))};
